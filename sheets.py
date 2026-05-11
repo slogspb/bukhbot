@@ -1,6 +1,7 @@
 from dotenv import load_dotenv
 load_dotenv()
 import os
+import glob
 import logging
 from google.oauth2.service_account import Credentials
 from googleapiclient.discovery import build
@@ -9,8 +10,10 @@ logger = logging.getLogger(__name__)
 
 SPREADSHEET_ID = os.getenv("SPREADSHEET_ID", "")
 SHEET_NAME = os.getenv("SHEET_NAME", "Лист1")
-SERVICE_ACCOUNT_FILE = os.getenv("GOOGLE_CREDENTIALS_FILE", "credentials.json")
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
+
+shared = glob.glob("/app/shared/*.json")
+SERVICE_ACCOUNT_FILE = shared[0] if shared else os.getenv("GOOGLE_CREDENTIALS_FILE", "credentials.json")
 
 _service = None
 
