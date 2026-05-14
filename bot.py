@@ -16,7 +16,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 BOT_TOKEN = os.getenv("BOT_TOKEN", "")
-ALLOWED_USER = "recrutmaster"
+ALLOWED_USER = os.getenv("ALLOWED_USER", "recrutmaster")
 PAYMENT_FORECAST_DAYS = {"маркет.операции": 30}
 
 def parse_contractor(text):
